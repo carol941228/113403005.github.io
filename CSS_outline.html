@@ -2,52 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Heading Styles Assignment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heading Styles Exercise</title>
     <style>
-        /* Container to mimic the white box in the image */
-        .container {
-            width: 500px;
-            padding: 20px;
-            font-family: "Times New Roman", Times, serif;
-        }
-
-        /* Heading 1: Left aligned, thick black overline/underline effect */
-        h1 {
-            display: inline-block;
-            border-top: 3px solid black;
-            border-bottom: 3px solid black;
-            margin-bottom: 20px;
+        /* Style for Heading 1: Overline and Pink Glow/Shadow */
+        .heading-1 {
+            text-decoration: overline;
+            text-decoration-thickness: 2px;
+            text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.8);
+            font-family: serif;
             font-size: 2em;
+            margin-bottom: 20px;
         }
 
-        /* Heading 2: Italic, boxed with a yellow highlight/border */
-        h2 {
-            border: 2px solid #808000; /* Darker yellow/olive border */
-            background-color: #FFFFE0; /* Light yellow background */
+        /* Style for Heading 2: Italic, Bordered Box with Yellow background */
+        .heading-2 {
             font-style: italic;
+            border: 2px solid #808000; /* Olive/Dark Yellow border */
+            background-color: #ffffcc; /* Light yellow background */
             padding: 5px;
-            font-weight: bold;
+            display: block;
+            font-family: serif;
             font-size: 1.5em;
+            margin-bottom: 20px;
         }
 
-        /* Heading 3: Right aligned and underlined */
-        h3 {
+        /* Style for Heading 3: Right Aligned and Underlined */
+        .heading-3 {
             text-align: right;
             text-decoration: underline;
+            font-family: serif;
             font-size: 1.17em;
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>This is heading 1</h1>
-        
-        <h2>This is heading 2</h2>
-        
-        <h3>This is heading 3</h3>
-    </div>
+    <h1 class="heading-1">This is heading 1</h1>
+
+    <h2 class="heading-2">This is heading 2</h2>
+
+    <h3 class="heading-3">This is heading 3</h3>
 
 </body>
 </html>
