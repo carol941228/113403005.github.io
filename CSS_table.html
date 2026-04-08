@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Position & Table Exercise</title>
+    <style>
+        /* 1. 表格樣式 */
+        table {
+            border-collapse: collapse;
+            width: 300px;
+            margin: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+
+        /* 表頭背景顏色 (灰色) */
+        th {
+            background-color: #808080;
+            color: white;
+        }
+
+        /* 奇數列背景顏色 (黃色) */
+        tr:nth-child(even) {
+            background-color: #FFFF00;
+        }
+
+        /* 2. 固定定位的 div 樣式 */
+        .fixed-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            height: 100px;
+            border: 3px solid #76b900; /* 綠色邊框 */
+            padding: 10px;
+            background-color: white;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>3</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="fixed-box">
+        This div element has position: fixed;
+    </div>
+
+</body>
+</html>
