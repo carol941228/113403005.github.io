@@ -1,52 +1,72 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>圖片變形與圓角控制</title>
-<style>
-  .image-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    width: 100%;
-    max-width: 1000px; 
-    margin: 50px auto;
-    gap: 20px;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的網頁作業 - 圖片比例練習</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 50px;
+            background-color: #f4f4f4;
+        }
 
-  /* 左側圖片：無變形、有圓角 */
-  .img-left {
-    width: 33%;
-    height: 300px; 
-    border-radius: 18px; 
-    object-fit: cover; 
-  }
+        /* 圖片容器基本設定 */
+        .img-container {
+            width: 33%; /* 對應你圖中的 width 33% */
+            text-align: center;
+        }
 
-  /* 中間圖片：正圓形、無變形 */
-  .img-center {
-    width: 150px; 
-    height: 150px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-  }
+        /* 左邊：18px 圓角，且不變形 */
+        .img-left {
+            width: 100%;
+            height: 300px;
+            border-radius: 18px; /* 對應你圖中的 radius 18px */
+            object-fit: cover; /* 關鍵：保持比例裁切，解決 no distortion */
+        }
 
-  /* 右側圖片：有變形 */
-  .img-right {
-    width: 33%;
-    height: 300px; 
-  }
-</style>
+        /* 中間：正圓形 */
+        .img-center {
+            width: 150px; /* 對應你圖中的 150px */
+            height: 150px;
+            border-radius: 50%; /* 變成正圓形 */
+            border: 2px solid #333; /* 對應你圖中的 border */
+            object-fit: cover; /* 保持比例 */
+        }
+
+        /* 右邊：變形效果 (Distortion) */
+        .img-right {
+            width: 100%;
+            height: 300px; /* 對應你圖中的 300px */
+            object-fit: fill; /* 關鍵：強制拉伸，會導致 distortion */
+        }
+
+        p {
+            margin-top: 10px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-<div class="image-container">
-  <img class="img-left" src="tower.jpg" alt="左側測試圖">
-  
-  <img class="img-center" src="middle.jpg" alt="中間測試圖">
-  
-  <img class="img-right" src="tower.jpg" alt="右側測試圖">
-</div>
+    <div class="img-container">
+        <img src="tower.jpg" alt="巴黎鐵塔" class="img-left">
+        <p>No Distortion (radius 18px)</p>
+    </div>
+
+    <div class="img-container" style="width: auto;">
+        <img src="middle.jpg" alt="風景" class="img-center">
+        <p>Circle (150px)</p>
+    </div>
+
+    <div class="img-container">
+        <img src="tower.jpg" alt="巴黎鐵塔" class="img-right">
+        <p>Distortion (Height 300px)</p>
+    </div>
 
 </body>
 </html>
