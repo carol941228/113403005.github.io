@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>響應式佈局作業</title>
+    <style>
+        /* 基礎樣式與背景 */
+        body {
+            background-color: #4A90E2; /* 藍色大背景 */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 白色畫布容器 */
+        .canvas {
+            background-color: white;
+            width: 100%;
+            max-width: 600px;
+            padding: 15px;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* 綠色區塊 (Header) */
+        .header-box {
+            background-color: #A2D149;
+            height: 120px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        /* 藍綠色區塊容器 (Middle Section) */
+        .middle-container {
+            display: flex;
+            flex-direction: column; /* 預設：垂直堆疊 (a) */
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .teal-box {
+            background-color: #00BCD4;
+            height: 60px;
+            border-radius: 4px;
+            flex: 1; /* 讓區塊在水平排列時等寬 */
+        }
+
+        /* 灰色區塊容器 (Footer Section) */
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 預設：2格一列 (a) */
+            gap: 10px;
+        }
+
+        .grey-box {
+            background-color: #F0F0F0;
+            height: 50px;
+            border-radius: 4px;
+        }
+
+        /* --- 關鍵：媒體查詢 Media Query --- */
+        /* 當寬度大於或等於 480px 時執行的樣式 (b) */
+        @media screen and (min-width: 480px) {
+            .middle-container {
+                flex-direction: row; /* 切換為：水平排列 */
+                height: 180px; /* 增加高度使比例接近圖片 */
+            }
+
+            .teal-box {
+                height: 100%; /* 讓方塊填滿容器高度 */
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(4, 1fr); /* 切換為：4格一列 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="canvas">
+        <div class="header-box"></div>
+
+        <div class="middle-container">
+            <div class="teal-box"></div>
+            <div class="teal-box"></div>
+            <div class="teal-box"></div>
+        </div>
+
+        <div class="footer-container">
+            <div class="grey-box"></div>
+            <div class="grey-box"></div>
+            <div class="grey-box"></div>
+            <div class="grey-box"></div>
+        </div>
+    </div>
+
+</body>
+</html>
