@@ -7,10 +7,9 @@
         body {
             margin: 0;
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #ffffff;
+            justify-content: flex_start;
+            align-items: flex_start;
+            padding:0;
         }
 
         /* 左邊：width 33%, radius 18px, no distortion */
@@ -19,6 +18,7 @@
             height: 300px;
             border-radius: 18px;
             object-fit: cover; /* 關鍵：不變形 */
+            display: block;
         }
 
         /* 中間：正圓形 150px */
@@ -28,6 +28,7 @@
             border-radius: 50%; /* 變成圓形 */
             border: 1px solid #000;
             object-fit: cover;
+            display: block;
         }
 
         /* 右邊：width 33%, height 300px, distortion */
@@ -35,6 +36,7 @@
             width: 33%;
             height: 300px;
             object-fit: fill; /* 關鍵：強制拉伸會導致變形 */
+            display: block;
         }
     </style>
 </head>
