@@ -41,11 +41,11 @@
 <body>
 
 <div class="image-container">
-  <img class="img-left" src="https://picsum.photos/id/1018/400/600" alt="左側測試圖">
+  <img class="img-left" src="tower.jpg" alt="左側測試圖">
   
-  <img class="img-center" src="https://picsum.photos/id/1015/300/300" alt="中間測試圖">
+  <img class="img-center" src="middle.jpg" alt="中間測試圖">
   
-  <img class="img-right" src="https://picsum.photos/id/1018/400/600" alt="右側測試圖">
+  <img class="img-right" src="tower.jpg" alt="右側測試圖">
 </div>
 
 </body>
