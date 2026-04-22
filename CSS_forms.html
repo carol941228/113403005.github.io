@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design to Code Button Example</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 僅為展示用途，讓按鈕在頁面置中 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+            margin: 0;
+        }
+
+        /* 按鈕樣式設定 */
+        .spec-button {
+            /* 1. 尺寸與圓角 (size: h22 / R8) */
+            height: 22px;
+            border-radius: 8px;
+            
+            /* 確保 border 的 1px 被計算在總高度 22px 內 */
+            box-sizing: border-box; 
+
+            /* 2. 背景與邊框 (background #ffffff / outline 1px #2f2f2f) */
+            background-color: #ffffff;
+            border: 1px solid #2f2f2f;
+            outline: none; /* 移除瀏覽器預設的點擊外框 */
+
+            /* 3. 字體樣式 (Font style: Roboto Regular 13px / Color: #2f2f2f) */
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400; /* Regular */
+            font-size: 13px;
+            color: #2f2f2f;
+
+            /* 排版微調：讓文字垂直置中，並加入適當的左右內邊距 */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px; /* 設計圖未標註寬度，此處加上合理的左右 padding */
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* 滑鼠懸停時的視覺回饋（非設計圖要求，但符合網頁常見體驗） */
+        .spec-button:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="spec-button">查看資訊</button>
+
+</body>
+</html>
