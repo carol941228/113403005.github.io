@@ -5,67 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 50px;
-            background-color: #f4f4f4;
+            min-height: 100vh;
+            background-color: #ffffff;
         }
 
-        /* 圖片容器基本設定 */
-        .img-container {
-            width: 33%; /* 對應你圖中的 width 33% */
-            text-align: center;
-        }
-
-        /* 左邊：18px 圓角，且不變形 */
+        /* 左邊：width 33%, radius 18px, no distortion */
         .img-left {
-            width: 100%;
+            width: 33%;
             height: 300px;
-            border-radius: 18px; /* 對應你圖中的 radius 18px */
-            object-fit: cover; /* 關鍵：保持比例裁切，解決 no distortion */
+            border-radius: 18px;
+            object-fit: cover; /* 關鍵：不變形 */
         }
 
-        /* 中間：正圓形 */
+        /* 中間：正圓形 150px */
         .img-center {
-            width: 150px; /* 對應你圖中的 150px */
+            width: 150px;
             height: 150px;
-            border-radius: 50%; /* 變成正圓形 */
-            border: 2px solid #333; /* 對應你圖中的 border */
-            object-fit: cover; /* 保持比例 */
+            border-radius: 50%; /* 變成圓形 */
+            border: 1px solid #000;
+            object-fit: cover;
         }
 
-        /* 右邊：變形效果 (Distortion) */
+        /* 右邊：width 33%, height 300px, distortion */
         .img-right {
-            width: 100%;
-            height: 300px; /* 對應你圖中的 300px */
-            object-fit: fill; /* 關鍵：強制拉伸，會導致 distortion */
-        }
-
-        p {
-            margin-top: 10px;
-            color: green;
-            font-weight: bold;
+            width: 33%;
+            height: 300px;
+            object-fit: fill; /* 關鍵：強制拉伸會導致變形 */
         }
     </style>
 </head>
 <body>
 
-    <div class="img-container">
-        <img src="images/tower.jpg" alt="巴黎鐵塔" class="img-left">
-        <p>No Distortion (radius 18px)</p>
-    </div>
+    <img src="tower.jpg" class="img-left">
 
-    <div class="img-container" style="width: auto;">
-        <img src="images/middle.jpg" alt="風景" class="img-center">
-        <p>Circle (150px)</p>
-    </div>
+    <img src="middle.jpg" class="img-center">
 
-    <div class="img-container">
-        <img src="images/tower.jpg" alt="巴黎鐵塔" class="img-right">
-        <p>Distortion (Height 300px)</p>
-    </div>
+    <img src="tower.jpg" class="img-right">
 
 </body>
 </html>
