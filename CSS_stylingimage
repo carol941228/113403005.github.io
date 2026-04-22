@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>圖片變形與圓角控制</title>
+<style>
+  /* 建立外部容器，使用 Flexbox 讓圖片並排 */
+  .image-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    width: 100%;
+    max-width: 1000px; /* 設定最大寬度以利於桌面版觀看 */
+    margin: 50px auto;
+    gap: 20px;
+  }
+
+  /* * 左側圖片：無變形 (no distortion)、有圓角 (radius 18px)
+   */
+  .img-left {
+    width: 33%;
+    height: 300px; /* 與右圖保持相同高度以作對比 */
+    border-radius: 18px; 
+    object-fit: cover; /* 關鍵屬性：保持圖片原始比例裁切，避免變形 */
+  }
+
+  /* * 中間圖片：正圓形 (150px * 150px)、無變形 (no distortion)
+   */
+  .img-center {
+    width: 150px; 
+    height: 150px; 
+    border-radius: 50%; /* 圖片註記為 border 150px，在 CSS 中設為 50% 即可呈現正圓 */
+    object-fit: cover; /* 保持比例，避免非正方形的原始圖片變形 */
+  }
+
+  /* * 右側圖片：有變形 (distortion)
+   */
+  .img-right {
+    width: 33%;
+    height: 300px; 
+    /* 預設行為：因為沒有加上 object-fit: cover，圖片會被強制拉伸至指定的寬高比例，進而產生變形 */
+  }
+</style>
+</head>
+<body>
+
+<div class="image-container">
+  <img class="img-left" src="https://images.unsplash.com/photo-1543305113-1b91386d34e6?auto=format&fit=crop&w=400&q=80" alt="巴黎鐵塔無變形">
+  
+  <img class="img-center" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=300&q=80" alt="風景圓形">
+  
+  <img class="img-right" src="https://images.unsplash.com/photo-1543305113-1b91386d34e6?auto=format&fit=crop&w=400&q=80" alt="巴黎鐵塔變形">
+</div>
+
+</body>
+</html>
