@@ -1,63 +1,211 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design to Code Button Example</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* 僅為展示用途，讓按鈕在頁面置中 */
+        /* 全域樣式設定 */
         body {
+            font-family: 'Roboto', "Noto Sans TC", sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f9f9f9;
-            margin: 0;
         }
 
-        /* 按鈕樣式設定 */
-        .spec-button {
-            /* 1. 尺寸與圓角 (size: h22 / R8) */
-            height: 22px;
-            border-radius: 8px;
-            
-            /* 確保 border 的 1px 被計算在總高度 22px 內 */
-            box-sizing: border-box; 
-
-            /* 2. 背景與邊框 (background #ffffff / outline 1px #2f2f2f) */
+        /* 主容器 */
+        .page-container {
+            width: 800px;
             background-color: #ffffff;
-            border: 1px solid #2f2f2f;
-            outline: none; /* 移除瀏覽器預設的點擊外框 */
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
 
-            /* 3. 字體樣式 (Font style: Roboto Regular 13px / Color: #2f2f2f) */
-            font-family: 'Roboto', sans-serif;
-            font-weight: 400; /* Regular */
-            font-size: 13px;
-            color: #2f2f2f;
+        /* 標題與說明 */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .description {
+            margin-bottom: 30px;
+            color: #666;
+        }
 
-            /* 排版微調：讓文字垂直置中，並加入適當的左右內邊距 */
-            display: inline-flex;
+        /* 中央內容區塊 (模擬設計圖) */
+        .content-block {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        /* 模擬圖片 (對應設計圖：Default 496x240) */
+        .image-placeholder {
+            width: 496px;
+            height: 240px;
+            background-color: #f0f0f0;
+            border: 1px solid #e0e0e0;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 10px; /* 設計圖未標註寬度，此處加上合理的左右 padding */
-            cursor: pointer;
-            text-decoration: none;
+            color: #888;
+            font-size: 14px;
+            font-weight: bold;
         }
 
-        /* 滑鼠懸停時的視覺回饋（非設計圖要求，但符合網頁常見體驗） */
-        .spec-button:hover {
-            background-color: #f0f0f0;
+        /* 模擬右側功能區塊 (包含按鈕) */
+        .action-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* 模擬上方區塊，並定位按鈕 */
+        .top-function-bar {
+            height: 22px; /* 按鈕高度 */
+            display: flex;
+            justify-content: flex-end; /* 按鈕靠右 */
+            align-items: center;
+        }
+
+        /* --- 實作目標按鈕 (基於設計圖標註) --- */
+        #targetButton {
+            /* 基礎尺寸與間距 */
+            height: 22px; /* size: h22 */
+            padding: 0 15px; /* 根據文字長度調整左右內距 */
+            box-sizing: border-box; /* 確保 padding 不會增加高度 */
+            
+            /* 圓角 */
+            border-radius: 8px; /* R8 (radius:8) */
+            
+            /* 邊框與背景 */
+            background-color: #ffffff; /* background #ffffff */
+            border: 1px solid #2f2f2f; /* outline 1px #2f2f2f */
+            
+            /* 字型樣式 (Font style) */
+            font-family: 'Roboto', sans-serif; /* Roboto */
+            font-weight: 400; /* Regular */
+            font-size: 13px; /* 13px */
+            color: #2f2f2f; /* Color: #2f2f2f */
+            text-align: center;
+            cursor: pointer;
+            
+            /* 確保文字置中 (垂直) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+
+            /* 滑鼠滑過樣式 */
+            transition: all 0.2s;
+        }
+        
+        #targetButton:hover {
+            background-color: #f5f5f5;
+        }
+        
+        #targetButton:active {
+            background-color: #e0e0e0;
+        }
+
+        /* 資訊區塊 - 預設隱藏 */
+        #infoPanel {
+            display: none;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 20px;
+        }
+
+        /* 資訊面板內的內容樣式 (對應設計圖下方的資訊) */
+        .info-header {
+            color: #707070;
+            font-size: 13px;
+            font-weight: normal;
+            margin-bottom: 10px;
+        }
+
+        .info-content {
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            color: #2f2f2f;
+        }
+        
+        .info-row {
+            margin-bottom: 8px;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            display: inline-block;
+            width: 80px;
         }
     </style>
 </head>
 <body>
 
-    <button class="spec-button">查看資訊</button>
+<div class="page-container">
+    <h1>1. 如何實作設計圖上的按鈕</h1>
+    <p class="description">這是一個工程師與設計師合作的範例。我們根據設計圖上的標註，精確地實作特定的「查看資訊」按鈕。點擊該按鈕後，會顯示詳細資訊。</p>
+
+    <div class="content-block">
+        <div class="image-placeholder">
+            Default 496x240
+        </div>
+        
+        <div class="action-area">
+            <div class="top-function-bar">
+                <button id="targetButton">查看資訊</button>
+            </div>
+            
+            <div style="font-size:12px; color:#666;">
+                <p>預覽圖片區間</p>
+                </div>
+        </div>
+    </div>
+
+    <div id="infoPanel">
+        <div class="info-header">Font style 預覽內文字</div>
+        <div class="info-content">
+            <div class="info-row"><span class="info-label">建立日期:</span> 2017/10/12</div>
+            <div class="info-row"><span class="info-label">類型:</span> JPG</div>
+            <div class="info-row"><span class="info-label">大小:</span> 466.97KB</div>
+            <div class="info-row"><span class="info-label">路徑:</span> \\designcenter.qnap.com.tw\DesignCenter\PM - RD 協作\WEB\Stations\A_Image2PDFxZsample</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // 獲取按鈕和資訊面板元素
+    const targetButton = document.getElementById('targetButton');
+    const infoPanel = document.getElementById('infoPanel');
+
+    // 新增點擊事件監聽器
+    targetButton.addEventListener('click', function() {
+        // 切換資訊面板的顯示狀態
+        if (infoPanel.style.display === 'none' || infoPanel.style.display === '') {
+            infoPanel.style.display = 'block';
+            targetButton.textContent = '隱藏資訊'; // 修改按鈕文字
+        } else {
+            infoPanel.style.display = 'none';
+            targetButton.textContent = '查看資訊'; // 恢復按鈕文字
+        }
+    });
+</script>
 
 </body>
 </html>
