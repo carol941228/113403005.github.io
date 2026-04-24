@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Precise Design Implementation</title>
+    <title>Precise Layout Alignment</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -18,14 +18,15 @@
             justify-content: center;
         }
 
-        /* 外部容器：寬度 496 + 左 20 + 右 26 */
+        /* 外部總寬度：496 + 20 + 26 = 542px */
         .outer-wrapper {
-            width: 542px; /* 496 + 20 + 26 */
+            width: 542px;
             border: 1px solid #e0e0e0;
             box-sizing: border-box;
+            background-color: #ffffff;
         }
 
-        /* 上方灰色空間 */
+        /* 上方灰色 Header */
         .header-bar {
             width: 100%;
             height: 35px;
@@ -33,7 +34,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 18px 0 15px; /* 右邊距 18 */
+            padding: 0 18px 0 15px; 
             box-sizing: border-box;
             border-bottom: 1px solid #e0e0e0;
         }
@@ -43,62 +44,76 @@
             color: #707070;
         }
 
-        /* 查看資訊按鈕 */
+        /* 按鈕樣式 */
         #actionButton {
             height: 22px;
             padding: 0 12px;
-            border-radius: 8px; /* R8 */
+            border-radius: 8px;
             background-color: #ffffff;
             border: 1px solid #2f2f2f;
             font-size: 13px;
             color: #2f2f2f;
             cursor: pointer;
+            outline: none;
         }
 
-        /* 捲軸內容區 */
-        .content-container {
+        /* 內容滾動區 */
+        .scroll-container {
             width: 100%;
-            height: 350px;
-            overflow-y: scroll;
+            height: 240px; /* 初始設為圖片高度 */
+            overflow-y: hidden;
             overflow-x: hidden;
-            background-color: #ffffff;
+            transition: height 0.3s ease;
         }
 
-        /* 圖片容器區塊 (496px) */
+        .scroll-container.expanded {
+            height: 400px; /* 展開後高度 */
+            overflow-y: scroll;
+        }
+
+        /* 核心內容佈局區 (控制左右 20, 26 邊距) */
+        .content-layout {
+            padding-left: 20px;
+            padding-right: 26px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* 圖片區域：寬度 496px */
         .image-section {
-            margin-left: 20px;  /* 左邊距 20 */
-            margin-right: 26px; /* 右邊距 26 */
             width: 496px;
             height: 240px;
-            background-color: #ffdab9; /* 模擬紅圈處的橘色留白區 */
+            background-color: #ffdab9; /* 橘色留白區 */
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 10px;
+            margin-top: 0;
         }
 
-        /* 實體圖片 (450x240) */
         .main-image {
-            width: 450px; /* 紅圈標註：450x240 */
+            width: 450px; /* 圖片內容 450 */
             height: 240px;
             object-fit: cover;
             display: block;
         }
 
-        /* 資訊面板 */
+        /* 資訊面板：與圖片區域寬度 (496px) 完全對齊 */
         .info-panel {
-            margin-left: 20px;
-            margin-right: 26px;
-            padding: 20px 0;
+            width: 496px;
+            padding: 10px 0;
+            box-sizing: border-box;
+            /* 預設隱藏，點擊按鈕後由 JS 控制 */
+            display: none;
         }
 
         .info-row {
             font-size: 13px;
             color: #2f2f2f;
-            margin-bottom: 4px;
-            background-color: #ccffcc; /* 綠色高亮 */
+            margin-bottom: 2px;
+            background-color: #99ff99; /* 綠色背景與橘色框對齊 */
             padding: 4px 8px;
             display: flex;
+            box-sizing: border-box;
         }
 
         .info-label {
@@ -107,10 +122,10 @@
         }
 
         /* 自定義捲軸 */
-        .content-container::-webkit-scrollbar {
+        .scroll-container::-webkit-scrollbar {
             width: 8px;
         }
-        .content-container::-webkit-scrollbar-thumb {
+        .scroll-container::-webkit-scrollbar-thumb {
             background: #cccccc;
             border-radius: 4px;
         }
@@ -121,34 +136,45 @@
 <div class="outer-wrapper">
     <div class="header-bar">
         <div class="label-preview">預覽</div>
-        <button id="actionButton">收起資訊</button>
+        <button id="actionButton">查看資訊</button>
     </div>
 
-    <div class="content-container">
-        <div class="image-section">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=450&q=80" alt="Landscape" class="main-image">
-        </div>
-        
-        <div class="info-panel">
-            <div class="info-row"><span class="info-label">修改日期:</span> 2017/10/12</div>
-            <div class="info-row"><span class="info-label">類型:</span> JPG</div>
-            <div class="info-row"><span class="info-label">大小:</span> 466.97KB</div>
-            <div class="info-row"><span class="info-label">路徑:</span> \\designcenter.qnap.com.tw\DesignCenter\PM - RD 協作\WEB\Stations\A_Image2PDFxZsample</div>
+    <div class="scroll-container" id="scrollWrapper">
+        <div class="content-layout">
+            <div class="image-section">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=450&q=80" alt="Preview" class="main-image">
+            </div>
+            
+            <div class="info-panel" id="infoPanel">
+                <div class="info-row"><span class="info-label">修改日期:</span> 2017/10/12</div>
+                <div class="info-row"><span class="info-label">類型:</span> JPG</div>
+                <div class="info-row"><span class="info-label">大小:</span> 466.97KB</div>
+                <div class="info-row"><span class="info-label">路徑:</span> \\designcenter.qnap.com.tw\DesignCenter\PM - RD 協作\WEB\Stations\A_Image2PDFxZsample</div>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
     const btn = document.getElementById('actionButton');
-    const container = document.querySelector('.content-container');
+    const wrapper = document.getElementById('scrollWrapper');
+    const info = document.getElementById('infoPanel');
 
     btn.addEventListener('click', function() {
-        if (container.style.display === 'none') {
-            container.style.display = 'block';
+        wrapper.classList.toggle('expanded');
+        
+        if (wrapper.classList.contains('expanded')) {
+            info.style.display = 'block';
             btn.textContent = '收起資訊';
+            // 平滑滾動至資訊區
+            setTimeout(() => {
+                wrapper.scrollTo({ top: 50, behavior: 'smooth' });
+            }, 100);
         } else {
-            container.style.display = 'none';
+            // 延遲隱藏文字以維持動畫流暢，或直接隱藏
+            info.style.display = 'none';
             btn.textContent = '查看資訊';
+            wrapper.scrollTo({ top: 0, behavior: 'smooth' });
         }
     });
 </script>
