@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Precise Layout Alignment</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -18,12 +17,13 @@
             justify-content: center;
         }
 
-        /* 外部總寬度：496 + 20 + 26 = 542px */
+        /* 外部總寬度控制：20 (左) + 496 (內容) + 26 (右) = 542px */
         .outer-wrapper {
             width: 542px;
             border: 1px solid #e0e0e0;
             box-sizing: border-box;
             background-color: #ffffff;
+            overflow: hidden;
         }
 
         /* 上方灰色 Header */
@@ -44,7 +44,6 @@
             color: #707070;
         }
 
-        /* 按鈕樣式 */
         #actionButton {
             height: 22px;
             padding: 0 12px;
@@ -54,80 +53,89 @@
             font-size: 13px;
             color: #2f2f2f;
             cursor: pointer;
-            outline: none;
         }
 
-        /* 內容滾動區 */
+        /* 滾動容器：強制顯示右側捲軸軌道 */
         .scroll-container {
             width: 100%;
-            height: 240px; /* 初始設為圖片高度 */
-            overflow-y: hidden;
+            height: 250px; /* 預設高度稍微大於圖片，保持穩定 */
+            overflow-y: scroll; /* 強制開啟右側捲軸軌道 */
             overflow-x: hidden;
             transition: height 0.3s ease;
         }
 
+        /* 當點擊展開時，增加高度 */
         .scroll-container.expanded {
-            height: 400px; /* 展開後高度 */
-            overflow-y: scroll;
+            height: 450px; 
         }
 
-        /* 核心內容佈局區 (控制左右 20, 26 邊距) */
+        /* 核心內容佈局區 (控制左 20, 右 26 邊距) */
         .content-layout {
             padding-left: 20px;
             padding-right: 26px;
             width: 100%;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* 圖片區域：寬度 496px */
+        /* 圖片區域：496px 橘色背景 */
         .image-section {
             width: 496px;
             height: 240px;
-            background-color: #ffdab9; /* 橘色留白區 */
+            background-color: #ffdab9; 
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 0;
+            flex-shrink: 0;
+            margin-top: 10px;
         }
 
         .main-image {
-            width: 450px; /* 圖片內容 450 */
+            width: 450px; /* 圖片實體寬度 */
             height: 240px;
             object-fit: cover;
             display: block;
         }
 
-        /* 資訊面板：與圖片區域寬度 (496px) 完全對齊 */
+        /* 資訊面板：與橘色框 (496px) 對齊 */
         .info-panel {
             width: 496px;
-            padding: 10px 0;
+            padding: 10px 0 20px 0;
             box-sizing: border-box;
-            /* 預設隱藏，點擊按鈕後由 JS 控制 */
-            display: none;
+            display: none; /* 預設隱藏文字 */
         }
 
         .info-row {
-            font-size: 13px;
+            font-size: 12px;
             color: #2f2f2f;
             margin-bottom: 2px;
-            background-color: #99ff99; /* 綠色背景與橘色框對齊 */
+            background-color: #99ff99; /* 綠色背景 */
             padding: 4px 8px;
             display: flex;
             box-sizing: border-box;
+            width: 100%;
         }
 
         .info-label {
             font-weight: bold;
-            min-width: 80px;
+            min-width: 70px;
         }
 
-        /* 自定義捲軸 */
+        /* 自定義捲軸樣式，確保它清晰可見 */
         .scroll-container::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
+        }
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
         }
         .scroll-container::-webkit-scrollbar-thumb {
-            background: #cccccc;
-            border-radius: 4px;
+            background: #888;
+            border-radius: 5px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
     </style>
 </head>
@@ -166,12 +174,11 @@
         if (wrapper.classList.contains('expanded')) {
             info.style.display = 'block';
             btn.textContent = '收起資訊';
-            // 平滑滾動至資訊區
+            // 自動向下捲動一點，讓使用者知道下面有東西
             setTimeout(() => {
-                wrapper.scrollTo({ top: 50, behavior: 'smooth' });
+                wrapper.scrollTo({ top: 100, behavior: 'smooth' });
             }, 100);
         } else {
-            // 延遲隱藏文字以維持動畫流暢，或直接隱藏
             info.style.display = 'none';
             btn.textContent = '查看資訊';
             wrapper.scrollTo({ top: 0, behavior: 'smooth' });
