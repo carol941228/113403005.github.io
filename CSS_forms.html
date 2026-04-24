@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Precise Image Detail Portal</title>
+    <title>Precise Design Implementation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -13,112 +13,106 @@
             font-family: 'Roboto', sans-serif;
             background-color: #ffffff;
             margin: 0;
-            padding: 50px;
+            padding: 40px;
             display: flex;
             justify-content: center;
         }
 
-        /* 外部容器：依照 496 寬度 + 左右 padding (20, 26) */
+        /* 外部容器：寬度 496 + 左 20 + 右 26 */
         .outer-wrapper {
-            width: calc(496px + 20px + 26px); 
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            width: 542px; /* 496 + 20 + 26 */
+            border: 1px solid #e0e0e0;
+            box-sizing: border-box;
         }
 
-        /* 2. 圖片上方空間必須是灰色 (header bg color #f6f6f6) */
+        /* 上方灰色空間 */
         .header-bar {
             width: 100%;
-            height: 35px; /* 設計稿標註高度 35 */
+            height: 35px;
             background-color: #f6f6f6;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 18px 0 15px; /* 右邊距 18 */
             box-sizing: border-box;
-            /* 左右間距：左邊距 5, 右邊距 18 */
-            padding-left: 5px;
-            padding-right: 18px;
+            border-bottom: 1px solid #e0e0e0;
         }
 
         .label-preview {
             font-size: 13px;
             color: #707070;
-            margin-left: 10px; /* 依照標註微調 */
         }
 
-        /* 按鈕精確樣式：h22, R8, outline 1px #2f2f2f */
+        /* 查看資訊按鈕 */
         #actionButton {
             height: 22px;
-            padding: 0 15px;
-            border-radius: 8px;
+            padding: 0 12px;
+            border-radius: 8px; /* R8 */
             background-color: #ffffff;
             border: 1px solid #2f2f2f;
             font-size: 13px;
             color: #2f2f2f;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        /* 內容容器：包含左右間距 (左20, 右26) 與下方的資訊 */
+        /* 捲軸內容區 */
         .content-container {
             width: 100%;
-            height: 300px; /* 設定固定高度觸發捲軸 */
-            border: 1px solid #e0e0e0;
-            border-top: none;
-            background-color: #fff;
-            
-            /* 3. 卷軸在右邊 (overflow-y) */
-            overflow-y: scroll; 
+            height: 350px;
+            overflow-y: scroll;
             overflow-x: hidden;
-            box-sizing: border-box;
+            background-color: #ffffff;
         }
 
-        /* 圖片區域：寬度 496，左右各有間距 */
-        .image-wrapper {
-            padding-left: 20px; /* 圈選數字：左 20 */
-            padding-right: 26px; /* 圈選數字：右 26 */
-            padding-top: 10px;
-            width: 496px; /* 圈選數字：圖片寬 496 */
-        }
-
-        .main-image {
+        /* 圖片容器區塊 (496px) */
+        .image-section {
+            margin-left: 20px;  /* 左邊距 20 */
+            margin-right: 26px; /* 右邊距 26 */
             width: 496px;
             height: 240px;
-            display: block;
+            background-color: #ffdab9; /* 模擬紅圈處的橘色留白區 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        /* 實體圖片 (450x240) */
+        .main-image {
+            width: 450px; /* 紅圈標註：450x240 */
+            height: 240px;
             object-fit: cover;
+            display: block;
         }
 
         /* 資訊面板 */
         .info-panel {
-            padding: 20px;
-            padding-left: 20px; /* 保持與圖片左側對齊 */
+            margin-left: 20px;
+            margin-right: 26px;
+            padding: 20px 0;
         }
 
         .info-row {
             font-size: 13px;
-            margin-bottom: 8px;
-            background-color: #99ff99; /* 模擬圖中綠色高亮 */
-            padding: 2px 5px;
+            color: #2f2f2f;
+            margin-bottom: 4px;
+            background-color: #ccffcc; /* 綠色高亮 */
+            padding: 4px 8px;
+            display: flex;
         }
 
         .info-label {
             font-weight: bold;
-            display: inline-block;
-            width: 80px;
+            min-width: 80px;
         }
 
-        /* 捲軸樣式調整 (讓它更像設計稿) */
+        /* 自定義捲軸 */
         .content-container::-webkit-scrollbar {
-            width: 10px;
-        }
-        .content-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            width: 8px;
         }
         .content-container::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 5px;
+            background: #cccccc;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -131,8 +125,8 @@
     </div>
 
     <div class="content-container">
-        <div class="image-wrapper">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=496&q=80" alt="Landscape" class="main-image">
+        <div class="image-section">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=450&q=80" alt="Landscape" class="main-image">
         </div>
         
         <div class="info-panel">
@@ -149,12 +143,11 @@
     const container = document.querySelector('.content-container');
 
     btn.addEventListener('click', function() {
-        if (container.style.overflowY === 'hidden') {
-            container.style.overflowY = 'scroll';
+        if (container.style.display === 'none') {
+            container.style.display = 'block';
             btn.textContent = '收起資訊';
         } else {
-            container.style.overflowY = 'hidden';
-            container.scrollTop = 0;
+            container.style.display = 'none';
             btn.textContent = '查看資訊';
         }
     });
