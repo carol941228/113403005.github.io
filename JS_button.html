@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* 外框容器樣式 */
+        .container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 150px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 文字樣式 */
+        #message {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: black; /* 初始顏色 */
+        }
+
+        /* 按鈕樣式 */
+        button {
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="message">Hello</h1>
+        <button id="myButton">Button</button>
+    </div>
+
+    <script>
+        const btn = document.getElementById('myButton');
+        const txt = document.getElementById('message');
+
+        // 1. 滑鼠移入按鈕 (Mouse over)
+        btn.addEventListener('mouseover', function() {
+            txt.style.color = 'magenta'; // 改變顏色為粉紫色
+        });
+
+        // 2. 滑鼠移出按鈕 (選配：若想恢復原狀可加此段，但圖片未要求)
+        btn.addEventListener('mouseout', function() {
+            // txt.style.color = 'black'; 
+        });
+
+        // 3. 滑鼠點擊按鈕 (Mouse click)
+        btn.addEventListener('click', function() {
+            txt.innerHTML = 'Mouse Click';
+            txt.style.color = 'magenta'; 
+        });
+    </script>
+
+</body>
+</html>
