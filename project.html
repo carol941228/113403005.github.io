@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroGreen - 永續飛行計算器</title>
+    <style>
+        /* --- 1. CSS 設計：精品航空美學 (Boutique Airline Aesthetic) --- */
+        body {
+            background-color: #0f172a; /* 深藍色背景 Navy */
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #1e293b; /* 卡片深灰色 Charcoal */
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        .step-box {
+            background-color: #334155;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        /* 輸入框與按鈕 */
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #1e293b;
+            color: white;
+        }
+
+        button {
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+            background-color: #f8fafc;
+            color: #0f172a;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* 滑桿設計 */
+        input[type="range"] {
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        /* 結果顯示區 */
+        .result-card {
+            text-align: center;
+            background-color: #0f172a;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+
+        #carbon-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4ade80; /* 永續綠色 */
+            display: block;
+        }
+
+        .eco-miles {
+            color: #fbbf24; /* 金色哩程 */
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>AeroGreen</h1>
+    <p class="subtitle">重新定義未來的飛行 · 永續回饋計畫</p>
+
+    <div class="step-box">
+        <label>Step 1. 啟動您的綠色旅程</label>
+        <input type="text" id="flightInput" placeholder="例如：BR871">
+        <button onclick="setBase()">計算基準</button>
+    </div>
+
+    <div class="step-box">
+        <label>Step 2. 客製化您的永續行動</label>
+        
+        <label>預計托運行李重量：<span id="weightDisplay">20</span> 公斤</label>
+        <input type="range" id="weightSlider" min="0" max="30" value="20" oninput="calculate()">
+
+        <label>機上餐點選擇：</label>
+        <input type="radio" name="meal" value="0" checked onclick="calculate()"> 標準餐點 <br>
+        <input type="radio" name="meal" value="3" onclick="calculate()"> 素食低碳餐 (-3kg) <br>
+        <input type="radio" name="meal" value="8" onclick="calculate()"> 無需餐點 (-8kg)
+    </div>
+
+    <div class="result-card">
+        <label>您的預估碳足跡</label>
+        <span id="carbon-value">750 kg</span>
+        <p id="reduction-note" style="color: #94a3b8; font-size: 0.8rem;"></p>
+        <div class="eco-miles">✨ 系統已將省下的營運成本轉換為：<br><strong id="milesValue">+0</strong> Eco-Miles 綠色哩程</div>
+    </div>
+</div>
+
+<script>
+    /* --- 2. JavaScript 邏輯：動態計算 --- */
+    
+    // 初始基準值 (假設台北飛東京基準為 750kg)
+    let baseCarbon = 750;
+
+    function setBase() {
+        alert("已擷取航班數據！基準碳排放已更新。");
+        calculate();
+    }
+
+    function calculate() {
+        // 取得行李重量
+        const weight = document.getElementById("weightSlider").value;
+        document.getElementById("weightDisplay").innerText = weight;
+
+        // 取得餐點扣除額
+        const mealDeduction = document.querySelector('input[name="meal"]:checked').value;
+
+        // 行李減碳邏輯：假設每減少 1kg 行李減少 0.5kg 碳排 (以標準 20kg 為基準)
+        const weightDeduction = (20 - weight) * 0.5;
+
+        // 計算總排放
+        const totalDeduction = parseFloat(weightDeduction) + parseFloat(mealDeduction);
+        const finalCarbon = baseCarbon - totalDeduction;
+
+        // 更新畫面
+        document.getElementById("carbon-value").innerText = Math.round(finalCarbon) + " kg";
+        
+        if (totalDeduction > 0) {
+            document.getElementById("reduction-note").innerText = "成功為地球減少了 " + Math.round(totalDeduction) + " kg 的碳排放！";
+        } else {
+            document.getElementById("reduction-note").innerText = "";
+        }
+
+        // 計算綠色哩程 (假設每減 1kg 碳換 15 哩程)
+        const miles = Math.max(0, Math.round(totalDeduction * 15));
+        document.getElementById("milesValue").innerText = "+" + miles;
+    }
+</script>
+
+</body>
+</html>
