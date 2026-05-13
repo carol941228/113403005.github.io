@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 物件操作練習</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+        .container { max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
+        h3 { color: #333; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>JavaScript 物件屬性操作</h2>
+
+    <h3>1. 原始物件的所有屬性：</h3>
+    <pre id="all-properties"></pre>
+
+    <h3>2. 刪除 'age' 屬性後的物件內容：</h3>
+    <pre id="final-object"></pre>
+</div>
+
+<script>
+    // 根據 573.jpg 定義範例物件
+    var Person = {
+        firstName : "Tony",
+        lastName : "Lee",
+        age : 50,
+        eyeColor : "Blue"
+    };
+
+    // 任務 A: 列出所有屬性
+    // 使用 Object.keys() 取得所有鍵名並轉為字串
+    var properties = Object.keys(Person).join(", ");
+    document.getElementById("all-properties").textContent = properties;
+
+    // 任務 B: 刪除 age 屬性
+    delete Person.age;
+
+    // 任務 C: 顯示刪除後的物件
+    // 使用 JSON.stringify 格式化輸出物件內容
+    document.getElementById("final-object").textContent = JSON.stringify(Person, null, 4);
+
+    // 同步在控制台輸出結果，方便調試
+    console.log("所有屬性:", properties);
+    console.log("刪除後的物件:", Person);
+</script>
+
+</body>
+</html>
