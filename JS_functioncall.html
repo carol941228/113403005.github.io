@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Properties Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 500px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #28a745;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Circle Calculator</h2>
+    <div class="input-group">
+        <label for="radiusInput">Enter Radius:</label>
+        <input type="number" id="radiusInput" placeholder="e.g. 5" step="any">
+    </div>
+    <button onclick="handleCalculation()">Calculate</button>
+
+    <div class="result">
+        <p id="circumferenceOutput">The circumference is </p>
+        <p id="areaOutput">The area is </p>
+    </div>
+</div>
+
+<script>
+    // 1. 建立 calcCircumfrence 函式
+    function calcCircumfrence(radius) {
+        // 圓周長公式：2 * π * r
+        const circumference = 2 * Math.PI * radius;
+        // 格式化輸出字串 (四捨五入至小數點後兩位，可依需求調整)
+        return "The circumference is " + circumference.toFixed(2);
+    }
+
+    // 2. 建立 calcArea 函式
+    function calcArea(radius) {
+        // 圓面積公式：π * r^2
+        const area = Math.PI * Math.pow(radius, 2);
+        // 格式化輸出字串
+        return "The area is " + area.toFixed(2);
+    }
+
+    // 處理網頁按鍵觸發的函式
+    function handleCalculation() {
+        const radiusValue = parseFloat(document.getElementById('radiusInput').value);
+
+        if (isNaN(radiusValue) || radiusValue <= 0) {
+            alert("Please enter a valid positive number for the radius.");
+            return;
+        }
+
+        // 呼叫函式並更新畫面
+        document.getElementById('circumferenceOutput').innerText = calcCircumfrence(radiusValue);
+        document.getElementById('areaOutput').innerText = calcArea(radiusValue);
+    }
+</script>
+
+</body>
+</html>
