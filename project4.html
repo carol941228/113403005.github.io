@@ -675,34 +675,37 @@
     </section>
 
     <!-- ── FOOTER ── -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <a href="#" class="logo">AeroGreen</a>
-                <p style="margin-top:15px; padding-right:20px;" data-i18n="footer_desc">致力於推廣永續航空，透過透明的數據與激勵機制，引領航空業邁向淨零未來。</p>
-            </div>
-            <div class="footer-col">
-                <h4 data-i18n="footer_links_h">快速連結</h4>
-                <ul>
-                    <li><a href="https://globalgoals.tw/13-climate-action" target="_blank">SDG 13 行動</a></li>
-                    <li><a href="https://www.ndc.gov.tw/Content_List.aspx?n=FD76ECBAE77D9811" target="_blank">台灣減碳藍圖</a></li>
-                    <li><a href="https://netzero.cna.com.tw/dictionary/001846/" target="_blank">永續燃油 (SAF)</a></li>
-                    <li><a href="https://carbonoffset.moenv.gov.tw/ApplicationRegistrationView/Intro" target="_blank">碳抵換計畫</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4 data-i18n="footer_contact_h">聯絡我們</h4>
-                <ul>
-                    <li><a href="mailto:info@aerogreen.tw">info@aerogreen.tw</a></li>
-                    <li data-i18n="footer_addr">台北市大安區航空路 100 號</li>
-                    <li data-i18n="footer_newsletter">訂閱電子報獲取新知</li>
-                </ul>
-            </div>
+<footer>
+    <div class="footer-content">
+        <div class="footer-col">
+            <a href="#" class="logo">AeroGreen</a>
+            <p style="margin-top:15px; padding-right:20px;" data-i18n="footer_desc">致力於推廣永續航空，透過透明的數據與激勵機制，引領航空業邁向淨零未來。</p>
         </div>
-        <div class="footer-bottom" data-i18n="footer_copy">
-            Copyright © 2026 AeroGreen Project. All Rights Reserved.
+        <div class="footer-col">
+            <h4 data-i18n="footer_links_h">快速連結</h4>
+            <ul>
+                <!-- 🌟 把 data-i18n 屬性移到 <a> 標籤裡面 🌟 -->
+                <li><a href="https://globalgoals.tw/13-climate-action" target="_blank" data-i18n="footer_link_sdg">SDG 13 行動</a></li>
+                <li><a href="https://www.ndc.gov.tw/Content_List.aspx?n=FD76ECBAE77D9811" target="_blank" data-i18n="footer_link_roadmap">台灣減碳藍圖</a></li>
+                <li><a href="https://netzero.cna.com.tw/dictionary/001846/" target="_blank" data-i18n="footer_link_saf">永續燃油 (SAF)</a></li>
+                <li><a href="https://carbonoffset.moenv.gov.tw/ApplicationRegistrationView/Intro" target="_blank" data-i18n="footer_link_offset">碳抵換計畫</a></li>
+            </ul>
         </div>
-    </footer>
+        <div class="footer-col">
+            <h4 data-i18n="footer_contact_h">聯絡我們</h4>
+            <ul>
+                <li><a href="mailto:info@aerogreen.tw">info@aerogreen.tw</a></li>
+                <li data-i18n="footer_addr">台北市大安區航空路 100 號</li>
+                <li data-i18n="footer_newsletter">訂閱電子報獲取新知</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span data-i18n="footer_copy">Copyright © 2026 AeroGreen Project. All Rights Reserved.</span>
+        <!-- 🌟 保留低調的後台開關 🌟 -->
+        <span id="adminToggleBtn" style="cursor: pointer; opacity: 0.2; font-size: 0.8rem; margin-left: 10px;">[Admin]</span>
+    </div>
+</footer>
 
     <!-- ── ADMIN DASHBOARD ── -->
     <div id="adminDashboard" class="admin-dashboard">
@@ -922,15 +925,15 @@
         /* Travel */
         travel_eyebrow: "Sustainable Travel", travel_heading: "探索綠色旅遊目的地",
         travel_desc: "「看見更美，也更永續的世界。」<br>選擇低碳住宿、搭乘環境友善航班，你的每一趟旅程，都能成為守護風景的力量。",
-        dest1_eco: "🌿 低碳推薦", dest1_region: "Japan · Hokkaido",
+        dest1_eco: " 低碳推薦", dest1_region: "Japan · Hokkaido",
         dest1_name: "北海道 花田生態之旅",
         dest1_desc: "搭乘 SAF 航班直飛，體驗花海、溫泉與自然農場，低碳住宿嚴選。",
         dest1_co2: "✈ 碳排：<strong>約 310 kg</strong>",
-        dest2_eco: "♻️ 碳中和", dest2_region: "Iceland · Reykjavík",
+        dest2_eco: " 碳中和", dest2_region: "Iceland · Reykjavík",
         dest2_name: "冰島 極光永續探索",
         dest2_desc: "100% 再生能源酒店、地熱溫泉、無塑行程，感受北歐永續生活哲學。",
         dest2_co2: "✈ 碳排：<strong>約 780 kg</strong>",
-        dest3_eco: "🏝 近境首選", dest3_region: "Taiwan · Local",
+        dest3_eco: " 近境首選", dest3_region: "Taiwan · Local",
         dest3_name: "台灣 山海生態慢旅",
         dest3_desc: "無碳排抵達！鐵路＋單車串連太魯閣、阿里山，支持在地永續農業。",
         dest3_co2: "✈ 碳排：<strong>0 kg（無飛行）</strong>",
@@ -979,6 +982,10 @@
         ent_btn: "企業登入",
         ent_hint: "需要開通企業帳號？", ent_contact: "聯絡我們",
         login_user_name: "旅客", login_enterprise_name: "企業管理者",
+        "footer_link_sdg": "SDG 13 行動",
+        "footer_link_roadmap": "台灣減碳藍圖",
+        "footer_link_saf": "永續燃油 (SAF)",
+        "footer_link_offset": "碳抵換計畫",
       },
 
       en: {
@@ -1043,15 +1050,15 @@
         saf_tag1: "Learn More", saf_tag2: "Cost Challenge",
         travel_eyebrow: "Sustainable Travel", travel_heading: "Explore Green Travel Destinations",
         travel_desc: '"See a more beautiful and more sustainable world."<br>Choose low-carbon stays and eco-friendly flights — every trip you take can become a force for protecting our landscapes.',
-        dest1_eco: "🌿 Low-Carbon Pick", dest1_region: "Japan · Hokkaido",
+        dest1_eco: " Low-Carbon Pick", dest1_region: "Japan · Hokkaido",
         dest1_name: "Hokkaido Flower Field Eco Tour",
         dest1_desc: "Fly direct on a SAF flight to experience flower fields, hot springs and natural farms with carefully selected low-carbon accommodation.",
         dest1_co2: "✈ CO₂: <strong>~310 kg</strong>",
-        dest2_eco: "♻️ Carbon Neutral", dest2_region: "Iceland · Reykjavík",
+        dest2_eco: " Carbon Neutral", dest2_region: "Iceland · Reykjavík",
         dest2_name: "Iceland Aurora Sustainable Journey",
         dest2_desc: "100% renewable energy hotels, geothermal hot springs, plastic-free itineraries — experience Nordic sustainable living philosophy.",
         dest2_co2: "✈ CO₂: <strong>~780 kg</strong>",
-        dest3_eco: "🏝 Local Favorite", dest3_region: "Taiwan · Local",
+        dest3_eco: " Local Favorite", dest3_region: "Taiwan · Local",
         dest3_name: "Taiwan Mountain & Sea Eco Slow Travel",
         dest3_desc: "Zero-carbon arrival! Rail + cycling connecting Taroko and Alishan, supporting local sustainable agriculture.",
         dest3_co2: "✈ CO₂: <strong>0 kg (no flight)</strong>",
@@ -1097,6 +1104,10 @@
         ent_btn: "Enterprise Login",
         ent_hint: "Need an enterprise account?", ent_contact: "Contact Us",
         login_user_name: "Traveler", login_enterprise_name: "Enterprise Admin",
+        "footer_link_sdg": "SDG 13 Climate Action",
+        "footer_link_roadmap": "Taiwan Carbon Blueprint",
+        "footer_link_saf": "Sustainable Aviation Fuel (SAF)",
+        "footer_link_offset": "Carbon Offset Programs",
       },
 
       ja: {
@@ -1161,15 +1172,15 @@
         saf_tag1: "詳しく見る", saf_tag2: "コスト課題中",
         travel_eyebrow: "Sustainable Travel", travel_heading: "グリーン旅行先を探索",
         travel_desc: "「より美しく、より持続可能な世界を見てみよう。」<br>低炭素宿泊施設と環境に優しいフライトを選べば、あなたの旅が景色を守る力になります。",
-        dest1_eco: "🌿 低炭素おすすめ", dest1_region: "Japan · Hokkaido",
+        dest1_eco: " 低炭素おすすめ", dest1_region: "Japan · Hokkaido",
         dest1_name: "北海道 花畑エコツアー",
         dest1_desc: "SAFフライトで直行し、花畑、温泉、自然農場を体験。厳選された低炭素宿泊施設。",
         dest1_co2: "✈ 排出量：<strong>約310 kg</strong>",
-        dest2_eco: "♻️ カーボンニュートラル", dest2_region: "Iceland · Reykjavík",
+        dest2_eco: " カーボンニュートラル", dest2_region: "Iceland · Reykjavík",
         dest2_name: "アイスランド オーロラ持続可能な探索",
         dest2_desc: "100%再生可能エネルギーホテル、地熱温泉、プラスチックフリーの旅程で北欧の持続可能な生活哲学を体験。",
         dest2_co2: "✈ 排出量：<strong>約780 kg</strong>",
-        dest3_eco: "🏝 近場のおすすめ", dest3_region: "Taiwan · Local",
+        dest3_eco: " 近場のおすすめ", dest3_region: "Taiwan · Local",
         dest3_name: "台湾 山海エコスロートラベル",
         dest3_desc: "ゼロ炭素到着！鉄道＋サイクリングで太魯閣と阿里山を結び、地域の持続可能な農業を支援。",
         dest3_co2: "✈ 排出量：<strong>0 kg（飛行なし）</strong>",
@@ -1215,6 +1226,10 @@
         ent_btn: "企業ログイン",
         ent_hint: "企業アカウントが必要ですか？", ent_contact: "お問い合わせ",
         login_user_name: "旅客", login_enterprise_name: "企業管理者",
+        "footer_link_sdg": "SDG 13 気候変動対策",
+        "footer_link_roadmap": "台湾脱炭素ロードマップ",
+        "footer_link_saf": "持続可能な航空燃料 (SAF)",
+        "footer_link_offset": "カーボン・オフセット計画",
       }
     };
 
@@ -1441,7 +1456,6 @@
                 <div class="em-act-pts">+95 ✦</div>
               </div>
               <div class="em-act-row">
-                <div class="em-act-icon">🥗</div>
                 <div class="em-act-info">
                   <div class="em-act-name">${d.em_act3_name}</div>
                   <div class="em-act-date">${d.em_act3_date}</div>
@@ -1449,7 +1463,6 @@
                 <div class="em-act-pts">+45 ✦</div>
               </div>
               <div class="em-act-row">
-                <div class="em-act-icon">🌲</div>
                 <div class="em-act-info">
                   <div class="em-act-name">${d.em_act4_name}</div>
                   <div class="em-act-date">${d.em_act4_date}</div>
